@@ -1,6 +1,6 @@
-# Self hosted image upload web app
+#Self hosted image upload web app
 
-## How to run
+##How to run
 
 - python -m venv venv
 - venv/bin/activate
