@@ -19,7 +19,7 @@ def main(ctx):
     if ctx.invoked_subcommand is None:
         while True:
             connect()
-            app.run()
+            app.run(port=80)
             print("Restarting...")
 
 @main.group(short_help='database stuff', options_metavar='[options]')
