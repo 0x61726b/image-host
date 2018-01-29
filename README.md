@@ -11,6 +11,7 @@ Add 2 lines of options like this
 ```angular2html
 BASE_URL = ''
 API_KEY = ''
+PORT=80
 ```
 - python app.py db init
 - sudo FLASK_APP=app.py ./venv/bin/python -m flask run --host=0.0.0.0 --port=80
