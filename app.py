@@ -122,7 +122,7 @@ def upload_from_url():
 
     with open(os.path.join(app.config['UPLOAD_FOLDER'], file_name), 'wb') as f:
         f.write(r.content)
-        return f"{config.BASE_URL}{file_name}"
+        return f"{config.BASE_URL}{new_image_db_inst.alias}"
 
 
 
