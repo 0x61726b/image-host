@@ -9,7 +9,7 @@
 - vim config.py
 Add 2 lines of options like this
 ```angular2html
-BASE_URL = "http://arkn.xyz/"
+BASE_URL = ""
 API_KEY = ''
 ```
 - python app.py db init
