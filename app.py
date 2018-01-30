@@ -112,7 +112,7 @@ def upload_from_url():
     if url == None:
         return
 
-    valid_file_types = ['png', 'jpg', 'gifv', 'gif']
+    valid_file_types = ['png', 'jpg','jpeg','gif']
 
     file_name = url_to_filename(url)
     file_ext = url_to_file_ext(url)
@@ -121,7 +121,6 @@ def upload_from_url():
 
     if not file_ext[1:] in valid_file_types:
         return abort(400)
-    url = url.replace('.gifv', '.gif')
     r = requests.get(url)
 
     new_image_db_inst = save_upload(file_name, file_ext)
