@@ -116,8 +116,6 @@ def upload_from_url():
 
     file_name = url_to_filename(url)
     file_ext = url_to_file_ext(url)
-    if file_ext == '.gifv':
-        file_ext = '.gif'
 
     if not file_ext[1:] in valid_file_types:
         return abort(400)
