@@ -85,8 +85,8 @@ def save_upload(r_file_name, ext):
 
 @app.before_request
 def log_request_info():
-    app.logger.info('Headers: %s', request.headers)
-    app.logger.info('Body: %s', request.get_data())
+    print('Headers: %s', request.headers)
+    print('Body: %s', request.get_data())
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
