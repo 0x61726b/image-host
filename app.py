@@ -92,11 +92,6 @@ def save_upload(r_file_name, ext):
 
     return None
 
-@app.before_request
-def log_request_info():
-    print('Headers: %s', request.headers)
-    print('Body: %s', request.get_data())
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     api_key = request.form['api_key']
