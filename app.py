@@ -11,6 +11,7 @@ import posixpath
 from urllib.parse import urlsplit, unquote
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 UPLOAD_FOLDER = os.path.join('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -25,6 +26,14 @@ def url_to_filename(url):
 def url_to_file_ext(url):
     urlpath = urlsplit(url).path
     return os.path.splitext(urlpath)[1]
+
+@app.before_request
+def clear_trailing():
+    from flask import redirect, request
+
+    rp = request.path
+    if rp != '/' and rp.endswith('/'):
+        return redirect(rp[:-1])
 
 
 @click.group(invoke_without_command=True, options_metavar='[options]')
