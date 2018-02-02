@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, abort
 import config
 from database import *
 import click
@@ -63,7 +63,7 @@ def static_subdir(filename=None):
         image_db_inst = ImageName.select().where(ImageName.alias == str(filename).strip()).get()
         return send_from_directory(app.config['UPLOAD_FOLDER'], image_db_inst.file_name)
     except Exception as ex:
-        pass
+        return abort(404)
 
 
 def generate_random_file_name():
@@ -91,6 +91,11 @@ def save_upload(r_file_name, ext):
             break
 
     return None
+
+@app.before_request
+def log_request_info():
+    print('Headers: %s', request.headers)
+    print('Body: %s', request.get_data())
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -121,8 +126,13 @@ def upload_from_url():
     if url == None:
         return
 
+    valid_file_types = ['png', 'jpg','jpeg','gif']
+
     file_name = url_to_filename(url)
     file_ext = url_to_file_ext(url)
+
+    if not file_ext[1:] in valid_file_types:
+        return abort(400)
     r = requests.get(url)
 
     new_image_db_inst = save_upload(file_name, file_ext)

@@ -15,7 +15,7 @@ class ImageName(BaseModel):
 
 
 def init_db():
-    db.create_table(ImageName)
+    db.create_tables([ImageName])
 
 def connect():
     db.connect()
