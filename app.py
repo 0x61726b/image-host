@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, send_from_directory, abort
+from flask import Flask, request, send_from_directory, abort, redirect
 import config
 from database import *
 import click
@@ -138,6 +138,11 @@ def upload_from_url():
         f.write(r.content)
         return f"{config.BASE_URL}{new_image_db_inst.alias}"
 
+
+@app.route('/osu/b/<int:beatmap_id>')
+def osu_beatmap(beatmap_id):
+    if not beatmap_id == None:
+        return redirect(f"osu://b/{beatmap_id}")
 
 
 if __name__ == '__main__':
